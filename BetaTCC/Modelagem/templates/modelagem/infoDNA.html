@@ -1,0 +1,246 @@
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+    <style>
+        .conteudo{
+            width: 100%;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+
+    </style>
+
+    <div class="info-prot">
+        <button class="btn-voltar" onclick='window.location.href = "/listaDNA" ';>Voltar</button>
+        <h1>ID: <span class="title-prot">{{dna.id}}</span> - Proteina: <span class="title-prot">{{dna.titulo}} </span> </h1> 
+        
+        <div class="col">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Sequência</span>
+                <textarea class="form-control col-md-6" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência" disabled>{{dna.sequencia}}</textarea>
+                <button onclick="Converter();">Converter</button>
+            </div>
+            <div class="info-prot grafico" style="position: absolute;top: -23%;margin-right: 0%;margin-left: 65%;">
+                <div style="text-align: center;">
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.A}}')><p >{{dados.A}} - A</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.T}}')><p >{{dados.T}} - T</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.G}}')><p >{{dados.G}} - G</p></div>
+                    <div class='grafic-info' style='width: 88px; height: 86px; background-color:rgba(0, 0, 0, {{transparencia.C}}')><p >{{dados.C}} - C</p></div>
+                </div>
+            </div> 
+        </div>
+        <div class="info-prot" style="position: absolute;top: 33%;margin-right: 0%; margin-left: 63.2%;">
+            <span><b>{{dados}}</b></span>
+        </div>
+    
+    
+        <br>
+    </div>
+
+    <div class="info-prot">
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Fita Complementar do DNA inserido</b></span>
+        </div>
+        <div id="Fita" style="font-family: monospace;" class="hide informacoes-dados"> </div>
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Formar RNA mensageiro</b></span>
+        </div>
+        <div id="RNAm" style="font-family: monospace;" class="hide informacoes-dados"> </div>
+
+        <div class="titulo">
+            <span class="texto-titulo"><b>Tabela de Códons</b></span>
+            <div id="table-codon" class="hide">
+                <center>
+                    <table id="genCode" border="1">
+                        <caption>
+                        </caption>
+                        <tbody><tr>
+                        <th rowspan="2">1ª posição<br></th>
+                        <th colspan="4" style="text-align:center;">2ª posição (meio)</th>
+                        <th rowspan="2">3ª posição<br></th>
+                        </tr>
+                        
+                        
+                        <tr>
+                        <th class="base2">U</th>
+                        <th class="base2">C</th>
+                        <th class="base2">A</th>
+                        <th class="base2">G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">U</th>
+                        <td>Phe F
+                        <br>Phe F
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i></td>
+                        
+                        <td><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Ser S</i></td>
+                        
+                        <td>Tyr Y
+                        <br>Tyr Y
+                        <br>
+                        <span class="stop">stop</span>
+                        <br>
+                        <span class="stop">stop</span></td>
+                        
+                        <td>Cys C
+                        <br>Cys C
+                        <br>
+                        <span class="stop">stop</span>
+                        <br><b>Trp W</b></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">C</th>
+                        
+                        <td><i>Leu L</i>
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i>
+                        <br><i>Leu L</i></td>
+                        
+                        <td>Pro P
+                        <br>Pro P
+                        <br>Pro P
+                        <br>Pro P</td>
+                        
+                        <td>His H
+                        <br>His H
+                        <br>Gln Q
+                        <br>Gln Q</td>
+                        
+                        <td><i>Arg R</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">A</th>
+                        
+                        <td>Ile I
+                        <br>Ile I
+                        <br>Ile I
+                        <br><b>Met M</b></td>
+                        
+                        <td>Thr T
+                        <br>Thr T
+                        <br>Thr T
+                        <br>Thr T</td>
+                        
+                        <td>Asn N
+                        <br>Asn N
+                        <br>Lys K
+                        <br>Lys K</td>
+                        
+                        <td><i>Ser S</i>
+                        <br><i>Ser S</i>
+                        <br><i>Arg R</i>
+                        <br><i>Arg R</i></td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        
+                        <tr>
+                        <th class="base1">G</th>
+                        
+                        <td>Val V
+                        <br>Val V
+                        <br>Val V
+                        <br>Val V</td>
+                        
+                        <td>Ala A
+                        <br>Ala A
+                        <br>Ala A
+                        <br>Ala A</td>
+                        
+                        <td>Asp D
+                        <br>Asp D
+                        <br>Glu E
+                        <br>Glu E</td>
+                        
+                        <td>Gly G
+                        <br>Gly G
+                        <br>Gly G
+                        <br>Gly G</td>
+                        
+                        <th class="base3">U<br>C<br>A<br>G</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+    
+            <div class="titulo">
+                <span class="texto-titulo"><b>Gerar a Proteina formada (aminoacidos)</b></span>
+            </div>
+            <div id="Aminoacidos" class="hide"> </div>
+            
+            
+            </div>
+
+
+        </div>
+
+            
+    </div>
+
+    <!-- <div class="info-prot">
+        <h2>Taxa de Aparição:</h2>
+        <span><b>{{dados}}</b></span>
+    </div> -->
+
+    <!-- <div class="info-prot grafico">
+        <div style="text-align: center;">
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.A}}')><p >{{dados.A}} - A</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.T}}')><p >{{dados.T}} - T</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.G}}')><p >{{dados.G}} - G</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.C}}')><p >{{dados.C}} - C</p></div>
+        </div>
+    </div> -->
+</div>
+
+<script>
+    function Converter(){
+        $("#Fita").html('');
+        $("#RNAm").html('');
+        $("#RNAt").html('');
+        $("#Aminoacidos").html('');
+        var sequencia = $('#sequencia').val();
+        $.ajax({
+            method: "POST",
+            url: "..\\conversor",
+            data: 
+            { 
+                sequencia: sequencia,
+                csrfmiddlewaretoken: '{{ csrf_token }}' 
+            },
+            success: function(data){
+                console.log(data['fita']);
+                // Mudar aqui, pensei no caso se houvesse somente uma linha, no final desta div quando realizo uma sobreposição preciso gerar eles alinhando linha a linha 
+                $("#Fita").removeClass('hide').append('<p><b>Fita:</b></p>' + data['fita'] +'<p><b>Fita Completa:</b></p>' + data['fitaCompleta'] + '<p><b>Sobreposição:</b></p> <span style="font-family: monospace;">' + data['sobreposicao'] + '</span>'); 
+                $("#RNAm").removeClass('hide').append('<p><b>RNA Mensageiro: </b></p>' + '<div style="font-family: monospace;">' + data['RNAm'] + '</div>');
+                $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
+                $("#table-codon").removeClass('hide');
+            }
+        })
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+<div class="action">
+    <a href="{% url 'selecao' %}"><button class="btn-action"><span>Lista Cadastradas</span></button></a>
+    <a href="{% url 'upload' %}"><button class="btn-action"><span>Pipeline Proteina - Template</span></button></a> 
+    <a href="{% url 'comparar' %}"><button class="btn-action"> <span>Comparar Sequência</span></button></a>
+</div>
+{% endblock %}

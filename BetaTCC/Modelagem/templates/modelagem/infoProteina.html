@@ -1,0 +1,99 @@
+{% extends "modelagem/base.html" %}
+
+{% block body %}
+    <style>
+        .conteudo{
+            width: 100%;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .show{
+            display: block;
+        }
+
+        #qnt-amino{
+            color: blue;
+            font-weight: bold;
+            display: none;
+        }
+
+    </style>
+
+    <div class="info-prot">
+        <button class="btn-voltar" onclick='window.location.href = "/listaProteina" ';>Voltar</button>
+        <h1>ID: <span class="title-prot">{{prot.id}}</span> - Proteina: <span class="title-prot">{{prot.titulo}} </span> </h1> 
+        
+        <div class="col">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Sequência</span>
+                <textarea class="form-control col-md-7" rows="3" name="sequencia" id="sequencia" aria-label="Conteúdo da Sequência" disabled>{{prot.sequencia}}</textarea>
+                <button onclick="Converter();">Converter</button>
+            </div>
+        </div>     
+        <br>
+    </div>
+
+    <div class="info-prot">
+        <ul>
+    
+        </ul>
+    </div>
+
+    <div class="info-prot">
+        <h2>Taxa de Aparição:</h2> <h2 id='qnt-amino'> aminoacidos</h2>
+        <span><b>{{dados}}</b></span>
+    </div>
+
+    <div class="info-prot grafico">
+        <div style="text-align: center;">
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.A}}')><p >{{dados.A}} - A</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.R}}')><p >{{dados.R}} - R</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.N}}')><p >{{dados.N}} - N</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.D}}')><p >{{dados.D}} - D</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.E}}')><p >{{dados.E}} - E</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.C}}')><p >{{dados.C}} - C</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.G}}')><p >{{dados.G}} - G</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.Q}}')><p >{{dados.Q}} - Q</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.H}}')><p >{{dados.H}} - H</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.I}}')><p >{{dados.I}} - I</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.L}}')><p >{{dados.L}} - L</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.K}}')><p >{{dados.K}} - K</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.M}}')><p >{{dados.M}} - M</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.F}}')><p >{{dados.F}} - F</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.P}}')><p >{{dados.P}} - P</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.S}}')><p >{{dados.S}} - S</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.Y}}')><p >{{dados.Y}} - Y</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.T}}')><p >{{dados.T}} - T</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.W}}')><p >{{dados.W}} - W</p></div>
+            <div class='grafic-info' style='background-color:rgba(0, 0, 0, {{transparencia.V}}')><p >{{dados.V}} - V</p></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Converter(){
+        var sequencia = $('#sequencia').val();
+        $('#qnt-amino').css('display', 'block');
+        // $.ajax({
+        //     method: "POST",
+        //     url: "..\\conversor",
+        //     data: 
+        //     { 
+        //         sequencia: sequencia,
+        //         csrfmiddlewaretoken: '{{ csrf_token }}' 
+        //     },
+        //     success: function(data){
+        //         console.log(data['fita']);
+        //         $("#Fita").removeClass('hide').append(data['fita'],'<p><b>Fita Completa:</b></p>',data['fitaCompleta'],'<p><b>Sobreposição:</b></p>', data['sequencia'], '<br>', data['fita']);
+        //         $("#RNAm").removeClass('hide').append(data['RNAm']);
+        //         $("#Aminoacidos").removeClass('hide').append(data['aminoacidos']);
+                
+        //     }
+        })
+    }
+</script>
+
+{% endblock %}
